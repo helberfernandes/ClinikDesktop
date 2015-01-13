@@ -62,7 +62,7 @@ public class FrmExame extends JInternalFrame {
 	private JScrollPane scroll;
 	private List<Exame> list = new ArrayList<Exame>();
 	private JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-    private FrmAtendimento frmAtendimento = new FrmAtendimento();
+    private FrmAtendimento frmAtendimento ;
 	private JPanel panel = new JPanel();
 	private JPanel pnCadastro = new JPanel();
 	private JPanel pnPesquisa = new JPanel();

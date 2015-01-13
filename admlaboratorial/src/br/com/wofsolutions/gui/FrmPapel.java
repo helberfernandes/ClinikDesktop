@@ -46,7 +46,7 @@ public class FrmPapel extends JInternalFrame {
 	private Papel papelExcluir = new Papel();
 	private PapelDAOImpl papelDAOImpl = new PapelDAOImpl();
 	private JLabel lblNome = new JLabel("Nome:");
-	private FrmAtendimento frmAtendimento = new FrmAtendimento();
+	private FrmAtendimento frmAtendimento;
 	private FrmExame frmExame;
 	private JSeparator separator;
 	private JTextField txtPesq;
