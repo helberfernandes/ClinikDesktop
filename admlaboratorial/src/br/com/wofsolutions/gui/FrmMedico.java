@@ -50,7 +50,7 @@ public class FrmMedico extends JInternalFrame {
 	private JCheckBox chckbxSolicitante = new JCheckBox(Idioma.getMensagem(IdiomaKey.WOF_LABEL_SOLICITANTE));
 	private JLabel lblNome = new JLabel(Idioma.getMensagem(IdiomaKey.WOF_LABEL_NOME));
     private FrmExame frmExame;
-    private FrmAtendimento frmAtendimento = new FrmAtendimento();
+    private FrmAtendimento frmAtendimento;
 	private JSeparator separator;
 	private JTextField txtPesq;
 	private JTable table;

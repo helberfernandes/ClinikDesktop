@@ -47,12 +47,12 @@ public class Principal {
 	private FrmRelQTDProcedimentoPorExames frmRelQTDProcedimentoPorExames = new FrmRelQTDProcedimentoPorExames();
 	private FrmRelQTDProcedimentosPorSolicitante frmRelQTDProcedimentosPorSolicitante = new FrmRelQTDProcedimentosPorSolicitante();
 	private FrmRelTotalProcedimentosPorMedico frmRelTotalProcedimentosPorMedico = new FrmRelTotalProcedimentosPorMedico();
-	private FrmRelQTDProcedimentosPeloDRJuan relQTDProcedimentosPeloDRJuan = new FrmRelQTDProcedimentosPeloDRJuan(); 
+	private FrmRelQTDProcedimentosPeloDRJuan relQTDProcedimentosPeloDRJuan = new FrmRelQTDProcedimentosPeloDRJuan();
 	private FrmRelQTDProcedimentosPeloDRKalil relQTDProcedimentosPeloDRKalil = new FrmRelQTDProcedimentosPeloDRKalil();
-	private static Usuario  usuario = new Usuario();
-	 private FrmRelQTDMensalDeProcedimentoPorExames frmRelQTDMensalDeProcedimentoPorExames = new FrmRelQTDMensalDeProcedimentoPorExames();
- private FrmRelAtendimentoporExames frmRelAtendimentoporExames = new FrmRelAtendimentoporExames();
-	 
+	private static Usuario usuario = new Usuario();
+	private FrmRelQTDMensalDeProcedimentoPorExames frmRelQTDMensalDeProcedimentoPorExames = new FrmRelQTDMensalDeProcedimentoPorExames();
+	private FrmRelAtendimentoporExames frmRelAtendimentoporExames = new FrmRelAtendimentoporExames();
+
 	/**
 	 * Launch the application.
 	 */
@@ -72,23 +72,21 @@ public class Principal {
 	/**
 	 * Create the application.
 	 */
-	public Principal(Usuario usuario ) {
-		this.usuario=usuario;
+	public Principal(Usuario usuario) {
+		this.usuario = usuario;
 		initialize();
 	}
-	
-	
 
 	public Principal() {
 		super();
-		//initialize();
+		// initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+
 		frmAtendimento = new JFrame();
 		frmAtendimento.getContentPane().setBackground(Color.RED);
 		frmAtendimento.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -98,8 +96,6 @@ public class Principal {
 		frmAtendimento.setTitle("Clinik 1.0.0");
 		frmAtendimento.setBounds(100, 100, 1024, 584);
 		frmAtendimento.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-
 
 		JDesktopPane desktopPane = new JDesktopPane();
 		desktopPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null,
@@ -109,17 +105,12 @@ public class Principal {
 		desktopPane.setForeground(SystemColor.activeCaptionBorder);
 		JLabel lab = new JLabel();
 		lab.setBounds(0, 0, 0, 0);
-		
-		
-		
-		
-		 frmAtendimentoPaciente = new FrmAtendimento();
-		 frmUsuario = new FrmUsuario();
-		 frmMedico = new FrmMedico();
-		 frmConvenio = new FrmConvenio();
-		 frmExame = new FrmExame();
-		
-		
+
+		frmAtendimentoPaciente = new FrmAtendimento();
+		frmUsuario = new FrmUsuario();
+		frmMedico = new FrmMedico();
+		frmConvenio = new FrmConvenio();
+		frmExame = new FrmExame();
 
 		double alt = frmAtendimento.getBounds().getHeight();
 		double larg = frmAtendimento.getBounds().getWidth();
@@ -140,35 +131,28 @@ public class Principal {
 		borderLayout.setHgap(4);
 		frmUsuario.setMaximizable(true);
 		frmUsuario.setBounds(0, 0, 1018, 511);
-		
+
 		Dimension desktopSize = desktopPane.getSize();
-		
-		
+
 		frmUsuario.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frmUsuario.setClosable(true);
-		
+
 		GUIUtil.center(frmUsuario);
-		
+
 		desktopPane.add(frmUsuario);
-		
-		
-		
-		
-		
+
 		frmMedico.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frmMedico.setClosable(true);
 		frmMedico.setFrmExame(frmExame);
 		frmMedico.setFrmAtendimento(frmAtendimentoPaciente);
 		desktopPane.add(frmMedico);
-		
-		
-		frmRelAtendimentoporExames.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+		frmRelAtendimentoporExames
+				.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frmRelAtendimentoporExames.setClosable(true);
-		
+
 		desktopPane.add(frmRelAtendimentoporExames);
-		
-		
-		
+
 		frmConvenio.setBounds(0, 0, 1018, 511);
 
 		frmConvenio.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -200,13 +184,12 @@ public class Principal {
 		frmRelAtendimento.setClosable(true);
 		frmRelAtendimento.setUsuario(usuario);
 		desktopPane.add(frmRelAtendimento);
-		
-		
+
 		frmRelQTDMensalDeProcedimentoPorExames.setBounds(100, 100, 324, 202);
-		frmRelQTDMensalDeProcedimentoPorExames.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		frmRelQTDMensalDeProcedimentoPorExames
+				.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frmRelQTDMensalDeProcedimentoPorExames.setClosable(true);
 		desktopPane.add(frmRelQTDMensalDeProcedimentoPorExames);
-		
 
 		frmRelQTDProcedimentoPorExames.setBounds(100, 100, 324, 184);
 		frmRelQTDProcedimentoPorExames
@@ -226,52 +209,44 @@ public class Principal {
 		frmRelTotalProcedimentosPorMedico.setClosable(true);
 		desktopPane.add(frmRelTotalProcedimentosPorMedico);
 
-		
-	
-		
-		
-		
 		relQTDProcedimentosPeloDRJuan.setBounds(100, 100, 324, 261);
 		relQTDProcedimentosPeloDRJuan
 				.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		relQTDProcedimentosPeloDRJuan.setClosable(true);
 		desktopPane.add(relQTDProcedimentosPeloDRJuan);
-		
+
 		relQTDProcedimentosPeloDRKalil.setBounds(100, 100, 324, 261);
 		relQTDProcedimentosPeloDRKalil
 				.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		relQTDProcedimentosPeloDRKalil.setClosable(true);
 		desktopPane.add(relQTDProcedimentosPeloDRKalil);
-		
-		
+
 		frmPapeis.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frmPapeis.setClosable(true);
 		frmPapeis.setFrmUsuario(frmUsuario);
 		frmPapeis.setFrmAtendimento(frmAtendimentoPaciente);
 		desktopPane.add(frmPapeis);
-		
+
 		alt = frmAtendimento.getBounds().getHeight();
 		larg = frmAtendimento.getBounds().getWidth();
 		frmAtendimento.getContentPane().setBackground(new Color(65, 73, 39));
 
 		JToolBar toolBar = new JToolBar();
 		frmAtendimento.getContentPane().add(toolBar, BorderLayout.SOUTH);
-		
+
 		JLabel UserIcon = new JLabel();
 		UserIcon.setIcon(new ImageIcon(Configuracao.ICONE_USUARIO));
 		JLabel lblUsurio = new JLabel(" Usuário: ");
 		toolBar.add(UserIcon);
 		toolBar.add(lblUsurio);
-		
+
 		JLabel lblNewLabel = new JLabel(usuario.getLogin());
 		toolBar.add(lblNewLabel);
-		
-		
-		
+
 		GUIUtil.setLookAndFeel(frmAtendimento);
 		GUIUtil.center(frmAtendimento);
-		
-		//Barra de Menu Principal
+
+		// Barra de Menu Principal
 		JMenuBar menuBar = new JMenuBar();
 		frmAtendimento.setJMenuBar(menuBar);
 
@@ -318,7 +293,7 @@ public class Principal {
 		menuBar.add(mnCadastros);
 
 		JMenuItem mntmPlanosDeSade = new JMenuItem("Convênio");
-	
+
 		mntmPlanosDeSade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmConvenio.setVisible(true);
@@ -363,8 +338,9 @@ public class Principal {
 
 		JMenuItem mntmQuantidadeDeExames = new JMenuItem(
 				"Quantidade de Exames Por Médico");
-		
-		mntmQuantidadeDeExames.setVisible(usuario.getPapel().isPodeVerExamesRealizadosPorMedicos());
+
+		mntmQuantidadeDeExames.setVisible(usuario.getPapel()
+				.isPodeVerExamesRealizadosPorMedicos());
 		mntmQuantidadeDeExames.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				examesRealizadosPorMedicos.setVisible(true);
@@ -372,15 +348,17 @@ public class Principal {
 		});
 
 		JMenuItem mntmAtendimentos = new JMenuItem("Atendimentos");
-		mntmAtendimentos.setVisible(usuario.getPapel().isPodeVerRelatorioDeAtendimentos());
+		mntmAtendimentos.setVisible(usuario.getPapel()
+				.isPodeVerRelatorioDeAtendimentos());
 		mntmAtendimentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmRelAtendimento.setVisible(true);
 			}
 		});
 		mnRelatrios.add(mntmAtendimentos);
-		
-		JMenuItem mntmRelatrioDeProcedimentos = new JMenuItem("Relatório de procedimentos por Exames");
+
+		JMenuItem mntmRelatrioDeProcedimentos = new JMenuItem(
+				"Relatório de procedimentos por Exames");
 		mntmRelatrioDeProcedimentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmRelAtendimentoporExames.setVisible(true);
@@ -394,75 +372,79 @@ public class Principal {
 
 		JMenuItem mntmQtdProcedimentosPor = new JMenuItem(
 				"Relatório Geral de Procedimentos");
-		mntmQtdProcedimentosPor.setVisible(usuario.getPapel().isPodeVerQTDProcedimentoPorExames());
+		mntmQtdProcedimentosPor.setVisible(usuario.getPapel()
+				.isPodeVerQTDProcedimentoPorExames());
 		mntmQtdProcedimentosPor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmRelQTDProcedimentoPorExames.setVisible(true);
 			}
 		});
-		 mnRelatrios.add(mntmQtdProcedimentosPor);
+		mnRelatrios.add(mntmQtdProcedimentosPor);
 
 		JMenuItem mntmQtdProcedimentosPor_1 = new JMenuItem(
 				"QTD. Procedimentos por Solicitante");
-		mntmQtdProcedimentosPor_1.setVisible(usuario.getPapel().isPodeVerQTDProcedimentosPorSolicitante());
+		mntmQtdProcedimentosPor_1.setVisible(usuario.getPapel()
+				.isPodeVerQTDProcedimentosPorSolicitante());
 		mntmQtdProcedimentosPor_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmRelQTDProcedimentosPorSolicitante.setVisible(true);
 			}
 		});
-		 
-		 JMenuItem mntmQtdMensalDe = new JMenuItem("QTD. Mensal de Exames");
-		 mntmQtdMensalDe.addActionListener(new ActionListener() {
-		 	public void actionPerformed(ActionEvent arg0) {
-		 		frmRelQTDMensalDeProcedimentoPorExames.setVisible(true);
-		 	}
-		 });
-		 mnRelatrios.add(mntmQtdMensalDe);
-		 mnRelatrios.setVisible(usuario.getPapel().isPodeVerQTDMensalProcedimentoPorExames());
-		 mnRelatrios.add(mntmQtdProcedimentosPor_1);
+
+		JMenuItem mntmQtdMensalDe = new JMenuItem("QTD. Mensal de Exames");
+		mntmQtdMensalDe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmRelQTDMensalDeProcedimentoPorExames.setVisible(true);
+			}
+		});
+		mnRelatrios.add(mntmQtdMensalDe);
+		mnRelatrios.setVisible(usuario.getPapel()
+				.isPodeVerQTDMensalProcedimentoPorExames());
+		mnRelatrios.add(mntmQtdProcedimentosPor_1);
 
 		JSeparator separator_3 = new JSeparator();
-		 mnRelatrios.add(separator_3);
+		mnRelatrios.add(separator_3);
 
 		JMenuItem mntmQuantidadeDeExames_2 = new JMenuItem(
 				"Total Procedimentos por Medico");
-		mntmQuantidadeDeExames_2.setVisible(usuario.getPapel().isPodeVerTotalProcedimentosPorMedico());
+		mntmQuantidadeDeExames_2.setVisible(usuario.getPapel()
+				.isPodeVerTotalProcedimentosPorMedico());
 		mntmQuantidadeDeExames_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmRelTotalProcedimentosPorMedico.setVisible(true);
 			}
 		});
-		 mnRelatrios.add(mntmQuantidadeDeExames_2);
-		
+		mnRelatrios.add(mntmQuantidadeDeExames_2);
+
 		JMenuItem mntmrelQTDProcedimentosPeloDRJuan = new JMenuItem(
 				"Total Procedimentos do Dr. Juan");
-		mntmrelQTDProcedimentosPeloDRJuan.setVisible(usuario.getPapel().isPodeVerRelatorioDoJuan());
-		mntmrelQTDProcedimentosPeloDRJuan.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				relQTDProcedimentosPeloDRJuan.setVisible(true);
-			}
-		});
-		
-		
-		
-		 mnRelatrios.add(mntmrelQTDProcedimentosPeloDRJuan);
-		 
-		 JMenuItem mntmrelQTDProcedimentosPeloDRKalil = new JMenuItem(
-			"Total Procedimentos do Dr. Kalil");
-	mntmrelQTDProcedimentosPeloDRKalil.setVisible(usuario.getPapel().isPodeVerRelatorioDoKalil());
-	mntmrelQTDProcedimentosPeloDRKalil.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent arg0) {
-			relQTDProcedimentosPeloDRKalil.setVisible(true);
-		}
-	});
-	
-	
-	
-	 mnRelatrios.add(mntmrelQTDProcedimentosPeloDRKalil);
+		mntmrelQTDProcedimentosPeloDRJuan.setVisible(usuario.getPapel()
+				.isPodeVerRelatorioDoJuan());
+		mntmrelQTDProcedimentosPeloDRJuan
+				.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						relQTDProcedimentosPeloDRJuan.setVisible(true);
+					}
+				});
+
+		mnRelatrios.add(mntmrelQTDProcedimentosPeloDRJuan);
+
+		JMenuItem mntmrelQTDProcedimentosPeloDRKalil = new JMenuItem(
+				"Total Procedimentos do Dr. Kalil");
+		mntmrelQTDProcedimentosPeloDRKalil.setVisible(usuario.getPapel()
+				.isPodeVerRelatorioDoKalil());
+		mntmrelQTDProcedimentosPeloDRKalil
+				.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						relQTDProcedimentosPeloDRKalil.setVisible(true);
+					}
+				});
+
+		mnRelatrios.add(mntmrelQTDProcedimentosPeloDRKalil);
 
 		JSeparator separator = new JSeparator();
-		 mnRelatrios.add(separator);
-		 
+		mnRelatrios.add(separator);
+
 	}
 
 	public JFrame getFrmAtendimento() {
