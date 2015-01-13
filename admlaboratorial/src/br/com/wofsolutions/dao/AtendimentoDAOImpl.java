@@ -65,7 +65,18 @@ public class AtendimentoDAOImpl extends HibernateDAOImpl<Atendimento, Object, Ob
 	public List<Atendimento> getTotosAtendimentosPelaPesquisa(String pesq) {
 		hibernateUtil.getSession().beginTransaction();
 		Criteria criteria = hibernateUtil.getSession().createCriteria(Atendimento.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		criteria.add(Restrictions.and(Restrictions.eq("deletado", false), Restrictions.or(Restrictions.like("paciente", "%"+pesq+"%"), Restrictions.like("paciente", "%"+pesq+"%"))));
+		 
+		Calendar inicioMes = Calendar.getInstance();
+	        inicioMes.set(Calendar.DAY_OF_MONTH, 1);
+	        Calendar fimMes = Calendar.getInstance();
+	        fimMes.set(Calendar.DAY_OF_MONTH,fimMes.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+	            
+		
+		criteria.add(Restrictions.and(Restrictions.and(Restrictions.eq("deletado", false), Restrictions.or(Restrictions.like("paciente", "%"+pesq+"%"), Restrictions.like("paciente", "%"+pesq+"%"))),Restrictions.between("dataLancamento", inicioMes.getTime(),fimMes.getTime())));
+		
+		
+		
 		criteria.addOrder(Order.asc("paciente"));
 		List<Atendimento> list=criteria.list();
 		hibernateUtil.getSession().close();
