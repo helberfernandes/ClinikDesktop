@@ -52,7 +52,7 @@ public class AtendimentoDAOImpl extends HibernateDAOImpl<Atendimento, Object, Ob
 	        Calendar fimMes = Calendar.getInstance();
 	        fimMes.set(Calendar.DAY_OF_MONTH,fimMes.getActualMaximum(Calendar.DAY_OF_MONTH));
 
-	              System.out.println(""+inicioMes.getTime()+"-------"+fimMes.getTime());
+	            
 		
 		criteria.add(Restrictions.and(Restrictions.eq("deletado", false),Restrictions.between("dataLancamento", inicioMes.getTime(),fimMes.getTime())));
 		criteria.addOrder(Order.asc("paciente"));
