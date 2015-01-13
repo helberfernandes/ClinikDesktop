@@ -47,7 +47,7 @@ public class FrmConvenio extends JInternalFrame {
 	private Convenio convenioExcluir = new Convenio();
 	private ConvenioDAOImpl convenioDAOImpl = new ConvenioDAOImpl();
 	private JLabel lblNome = new JLabel(Idioma.getMensagem(IdiomaKey.WOF_LABEL_NOME));
-	private FrmAtendimento frmAtendimento;
+	private FrmAtendimento frmAtendimento = new FrmAtendimento();
 	private FrmExame frmExame;
 	private JSeparator separator;
 	private JTextField txtPesq;
