@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relExameRealizadosPorMedicos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="31"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logoEmpresa" class="java.lang.Object">
+		<defaultValueExpression><![CDATA["C:\\Users\\Helber\\Pictures\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="medicoId" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataDe" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="dataAte" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT tab.data_lancamento, month(tab.data_lancamento) mes, tab.medico_id, tab.medico, tab.exame, tab.total_exames_x_por_medico_no_mes,
+tab.total_exames_por_medico, tab.total_exames_x_no_mes, tab.total_do_mes, coalesce((((tab.total_do_mes/tab.total_do_mes_anterior)-1)*100),0) percentual_cresimento FROM(
+SELECT data_lancamento, m.nome medico, ex.nome exame,
+(
+ SELECT count(*) FROM wof_atendimento where month(data_lancamento)=month(a.data_lancamento) and medico_id=a.medico_id and exame_id=a.exame_id
+) total_exames_x_por_medico_no_mes,
+
+
+(
+ SELECT count(*) FROM wof_atendimento where month(data_lancamento)=month(a.data_lancamento) and medico_id=a.medico_id
+) total_exames_por_medico,
+
+(
+ SELECT count(*) FROM wof_atendimento where month(data_lancamento)=month(a.data_lancamento)  and exame_id=a.exame_id
+) total_exames_x_no_mes,
+
+(
+ SELECT count(*) FROM wof_atendimento where month(data_lancamento)=month(a.data_lancamento)
+) total_do_mes,
+coalesce(
+(
+SELECT  count(*) total FROM wof_atendimento
+   where month(data_lancamento)=month(DATE_ADD(a.data_lancamento, INTERVAL -1 MONTH))
+  group by month(a.data_lancamento)
+),0)
+total_do_mes_anterior,a.medico_id
+
+FROM wof_atendimento a
+join wof_medicos m on a.medico_id=m.medico_id
+join wof_exames ex on a.exame_id=ex.exame_id
+group by a.medico_id, a.exame_id, month(a.data_lancamento)
+order by data_lancamento, medico
+
+) tab
+where  tab.data_lancamento between $P{dataDe} and $P{dataAte} and (tab.medico_id=$P{medicoId}) or (0=$P{medicoId})]]>
+	</queryString>
+	<field name="data_lancamento" class="java.sql.Date"/>
+	<field name="mes" class="java.lang.Long"/>
+	<field name="medico_id" class="java.lang.Integer"/>
+	<field name="medico" class="java.lang.String"/>
+	<field name="exame" class="java.lang.String"/>
+	<field name="total_exames_x_por_medico_no_mes" class="java.lang.Long"/>
+	<field name="total_exames_por_medico" class="java.lang.Long"/>
+	<field name="total_exames_x_no_mes" class="java.lang.Long"/>
+	<field name="total_do_mes" class="java.lang.Long"/>
+	<field name="percentual_cresimento" class="java.math.BigDecimal"/>
+	<variable name="total_exame_medico" class="java.lang.String"/>
+	<variable name="CONTAGEM_PAGINA" class="java.lang.Integer" incrementType="Page" calculation="Count">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<group name="medico">
+		<groupExpression><![CDATA[$F{medico}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="mes">
+		<groupExpression><![CDATA[$F{mes}]]></groupExpression>
+		<groupHeader>
+			<band height="35">
+				<textField pattern="MMMMM" isBlankWhenNull="true">
+					<reportElement x="33" y="0" width="50" height="11"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{data_lancamento}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="33" height="11"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Mes:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="33" y="11" width="255" height="11"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{medico}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="22" width="187" height="11"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Exame]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="187" y="22" width="116" height="11"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Total ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="11" width="33" height="11"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Medico:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="303" y="22" width="100" height="11"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Total deste Exame no Mes]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="403" y="22" width="151" height="11"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Total de Exames do Médico no Mes]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="26">
+				<staticText>
+					<reportElement x="346" y="3" width="153" height="11"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Total de exames mes (Todos Os Médicos):]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="424" y="14" width="75" height="11"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[% de Crescimento:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="499" y="3" width="55" height="11"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{total_do_mes}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="true">
+					<reportElement x="499" y="14" width="55" height="11"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{percentual_cresimento}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="0" width="555" height="2"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="109" y="1" width="336" height="25"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Exames Realizados por Médicos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="100" height="41"/>
+				<imageExpression><![CDATA[$P{logoEmpresa}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="41" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="428" y="29" width="43" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Período de:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="471" y="29" width="34" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataDe}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="505" y="29" width="15" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Até]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="520" y="29" width="34" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataAte}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="555" height="11" forecolor="#FFFFFF" backcolor="#B7C28D">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) != 0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="187" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exame}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="0" width="116" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_exames_x_por_medico_no_mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="0" width="100" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_exames_x_no_mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="0" width="151" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_exames_por_medico}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="507" y="0" width="17" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="471" y="0" width="36" height="11"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Página :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="524" y="0" width="15" height="11"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[De:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="46" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Data e Hora:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="50" y="0" width="100" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="539" y="0" width="15" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{CONTAGEM_PAGINA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

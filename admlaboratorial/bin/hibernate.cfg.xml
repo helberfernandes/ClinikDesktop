@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="wofconnection">
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/laboratorio</property>
+		<property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>		
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">st1215</property>
+		
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.format_sql">false</property>
+
+		<mapping class="br.com.wofsolutions.dominio.Papel" />
+		<mapping class="br.com.wofsolutions.dominio.Usuario" />
+		<mapping class="br.com.wofsolutions.dominio.Medico" />
+		<mapping class="br.com.wofsolutions.dominio.Convenio" />
+		<mapping class="br.com.wofsolutions.dominio.Exame" />
+		<mapping class="br.com.wofsolutions.dominio.ExameConvenio" />
+		<mapping class="br.com.wofsolutions.dominio.ExameConvenioPK" />	
+		<mapping class="br.com.wofsolutions.dominio.Atendimento" />
+		
+	
+	</session-factory>
+</hibernate-configuration>
