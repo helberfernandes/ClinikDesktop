@@ -1,7 +1,7 @@
-/imagens/
-/log/
-/relatorios/
-/br/
-/c3p0.properties
+/imagens
+/log
+/relatorios
 /hibernate.cfg.out.xml
 /hibernate.cfg.xml
+/br
+/c3p0.properties

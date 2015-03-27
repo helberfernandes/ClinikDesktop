@@ -7,14 +7,12 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.SystemColor;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -27,6 +25,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
 import br.com.wofsolutions.dominio.Usuario;
+import br.com.wofsolutions.gui.componentes.DecoratedDesktopPane;
 import br.com.wofsolutions.util.Configuracao;
 import br.com.wofsolutions.util.GUIUtil;
 
@@ -97,7 +96,7 @@ public class Principal {
 		frmAtendimento.setBounds(100, 100, 1024, 584);
 		frmAtendimento.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JDesktopPane desktopPane = new JDesktopPane();
+		DecoratedDesktopPane desktopPane = new DecoratedDesktopPane();
 		desktopPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null,
 				null, null, null));
 		desktopPane.setAutoscrolls(true);
@@ -112,17 +111,6 @@ public class Principal {
 		frmConvenio = new FrmConvenio();
 		frmExame = new FrmExame();
 
-		double alt = frmAtendimento.getBounds().getHeight();
-		double larg = frmAtendimento.getBounds().getWidth();
-
-		int altura = (int) alt;
-		int largura = (int) larg;
-		lab.setIcon(new ImageIcon(Configuracao.LOGO_HOLTER4));
-		lab.setBounds((int) larg, 0, 300, 100);
-		desktopPane.setBackground(new Color(27, 49, 59));
-		// desktopPane.setBackground(Color.white);
-		desktopPane.setLayout(null);
-		desktopPane.add(lab);
 
 		frmAtendimento.getContentPane().add(desktopPane, BorderLayout.CENTER);
 		BorderLayout borderLayout = (BorderLayout) frmUsuario.getContentPane()
@@ -227,8 +215,7 @@ public class Principal {
 		frmPapeis.setFrmAtendimento(frmAtendimentoPaciente);
 		desktopPane.add(frmPapeis);
 
-		alt = frmAtendimento.getBounds().getHeight();
-		larg = frmAtendimento.getBounds().getWidth();
+		
 		frmAtendimento.getContentPane().setBackground(new Color(65, 73, 39));
 
 		JToolBar toolBar = new JToolBar();

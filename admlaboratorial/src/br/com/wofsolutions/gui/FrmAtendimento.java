@@ -253,11 +253,11 @@ public class FrmAtendimento extends JInternalFrame {
 		atxtConvenio.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
-				if (atxtConvenio.getText().equals("PARTICULAR")) {
+			//	if (atxtConvenio.getText().equals("PARTICULAR")) {
 					txtValor.setEditable(true);
-				} else {
-					txtValor.setEditable(false);
-				}
+//				} else {
+//					txtValor.setEditable(false);
+//				}
 				ExameConvenio ec = exameDAOImpl.getTotosExamesConveniosPeloExameIdEPeloConvenioId(
 						exameDAOImpl.getExamePeloNome(atxtExame.getText())
 								.getExameId(), convenioDAOImpl
@@ -378,7 +378,7 @@ public class FrmAtendimento extends JInternalFrame {
 
 		txtValor = new JTextField();
 		txtValor.setFocusable(false);
-		txtValor.setEditable(false);
+		txtValor.setEditable(true);
 		txtValor.setBounds(10, 66, 86, 20);
 		txtValor.setText("0.0");
 		// txtValor.setText(String.valueOf(exameDAOImpl.getTotosExamesConveniosPeloExameIdEPeloConvenioId(exameDAOImpl.getExamePeloNome(atxtExame.getText()).getExameId()

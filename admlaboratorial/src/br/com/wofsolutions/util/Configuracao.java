@@ -19,6 +19,7 @@ public class Configuracao {
  public static URL LOGO_HOLTER=Configuracao.class.getResource("/imagens/logo_holter.png");
  public static URL LOGO_HOLTER3=Configuracao.class.getResource("/imagens/logo_holter3.png");
  public static URL LOGO_HOLTER4=Configuracao.class.getResource("/imagens/logo_holter4.png");
+ public static URL IMG_FUNDO=Configuracao.class.getResource("/imagens/fundo.png");
  public static URL ICONE_CLINIK=Configuracao.class.getResource("/imagens/axialis-square-light-grey-png/png/48x48/clinik.png");
  
  /*************************************************************************************
